@@ -20,7 +20,7 @@ namespace ECommerceAPI.Application.Repositories
 
         Task<bool> Remove(string id);
 
-        bool UpdateAsync(T model);
+        bool Update(T model);
 
         Task<int> SaveAsync();
     }
