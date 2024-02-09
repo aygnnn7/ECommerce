@@ -15,5 +15,6 @@ namespace ECommerceAPI.Domain.Entities
         public ICollection<Product> Products { get; set; }
 
         public Customer Customer { get; set; }
+        public Guid CustomerId { get; set; }
     }
 }
