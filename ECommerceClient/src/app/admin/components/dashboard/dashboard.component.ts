@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertifyOptions, AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 
 @Component({
   selector: 'app-dashboard',
