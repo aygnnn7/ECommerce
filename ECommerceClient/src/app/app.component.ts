@@ -8,5 +8,3 @@ declare var $: any
 export class AppComponent {
   title = 'ECommerceClient';
 }
-
-$(document).ready(()=> alert("Test: Jquery is integrated!"))
