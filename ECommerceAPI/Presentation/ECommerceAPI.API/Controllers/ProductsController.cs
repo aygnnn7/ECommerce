@@ -18,23 +18,10 @@ namespace ECommerceAPI.API.Controllers
             _productWriteRepository = productWriteRepository;
         }
         [HttpGet]
-        public async Task Get()
+        public async Task<IActionResult> Get()
         {
-            await _productWriteRepository.AddAsync(new()
-            {
-                Name = "C Product",
-                Price = 1.500F,
-                Stock = 10,
-                CreatedDate = DateTime.UtcNow
-
-            });
-            await _productWriteRepository.SaveAsync();
+            return Ok("Hello");
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
-        {
-            Product product = await _productReadRepository.GetByIdAsync(id);
-            return Ok(product);
-        }
+        
     }
 }
