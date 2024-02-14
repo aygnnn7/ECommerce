@@ -8,6 +8,8 @@ import { List_Product } from 'src/app/conctracts/list_product';
 import { AlertifyService, MessageType } from 'src/app/services/admin/alertify.service';
 import { ProductsService } from 'src/app/services/common/models/products.service';
 
+declare var $;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -18,7 +20,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   constructor(private productService: ProductsService, spinner: NgxSpinnerService, private alertifyService: AlertifyService) {
     super(spinner)
   }
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate', 'edit', 'delete'];
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -40,7 +42,8 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
     this.paginator.length = allProducts.totalCount;
   }
-  async pageChange(){
+  async pageChanged(){
     await this.getProducts()
-  }
+  } 
+  
 }
