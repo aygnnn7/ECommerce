@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Warning!</h2>
+<mat-dialog-content>
+  <p>The item is going to be deleted permanently. Are you sure?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Delete</button>
+</mat-dialog-actions>
