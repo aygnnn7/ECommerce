@@ -7,6 +7,8 @@ import { AlertifyService, MessageType, Position } from '../../admin/alertify.ser
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from '../dialog.service';
 import { FileUploadDialogComponent, FileUploadDialogState } from 'src/app/dialogs/file-upload-dialog/file-upload-dialog.component';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -18,7 +20,8 @@ export class FileUploadComponent {
     private alertifyService: AlertifyService,
     private customToastrService: CustomToastrService,
     private dialog: MatDialog,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner:NgxSpinnerService
     ) { }
 
   public files: NgxFileDropEntry[];
@@ -34,17 +37,18 @@ export class FileUploadComponent {
       });
     }
 
-     this.dialogService.openDialog({
+    this.dialogService.openDialog({
       componentType: FileUploadDialogComponent,
       data: FileUploadDialogState.Yes,
       afterClosed: ()=>{
+        this.spinner.show(SpinnerType.BallAtom)
         this.httpClientService.post({
           controller: this.options.controller,
           action: this.options.action,
           queryString: this.options.queryString,
           headers: new HttpHeaders({ "responseType": "blob" })
         }, fileData).subscribe(data => {
-    
+          this.spinner.hide(SpinnerType.BallAtom);
           const message: string = "The files are uploaded successfully.";
     
           if (this.options.isAdminPage) {
@@ -61,7 +65,7 @@ export class FileUploadComponent {
             })
           }
         }, (errorResponse: HttpErrorResponse) => {
-    
+          this.spinner.hide(SpinnerType.BallAtom);
           const message: string = "An error ocurred during upload.";
     
           if (this.options.isAdminPage) {
